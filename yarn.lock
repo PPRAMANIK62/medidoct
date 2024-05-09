@@ -1460,10 +1460,42 @@
   dependencies:
     "@swc/counter" "^0.1.3"
 
+"@tanstack/query-core@5.35.1":
+  version "5.35.1"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.35.1.tgz#a7e6cbf0f252475da19ba9cba6567e8fe683b2ee"
+  integrity sha512-0Dnpybqb8+ps6WgqBnqFEC+1F/xLvUosRAq+wiGisTgolOZzqZfkE2995dEXmhuzINiTM7/a6xSGznU0NIvBkw==
+
+"@tanstack/react-query@^5.35.1":
+  version "5.35.1"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-5.35.1.tgz#3b7c710bb32c6c71e0cbe64029dded9b0cbd9a0f"
+  integrity sha512-i2T7m2ffQdNqlX3pO+uMsnQ0H4a59Ens2GxtlMsRiOvdSB4SfYmHb27MnvFV8rGmtWRaa4gPli0/rpDoSS5LbQ==
+  dependencies:
+    "@tanstack/query-core" "5.35.1"
+
 "@tokenizer/token@^0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@tokenizer/token/-/token-0.3.0.tgz#fe98a93fe789247e998c75e74e9c7c63217aa276"
   integrity sha512-OvjF+z51L3ov0OyAU0duzsYuvO01PH7x4t6DJx+guahgTnBHkhJdG7soQeTSFLWN3efnHyibZ4Z8l2EuWwJN3A==
+
+"@trpc/client@^11.0.0-rc.366":
+  version "11.0.0-rc.366"
+  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-11.0.0-rc.366.tgz#05e664ae57f70f08436ca8ce1f7a346a14152a95"
+  integrity sha512-bIbcF/UhCifU5i9hbbaMlmOS2NgnRq5W0pJH2SJhrp6jyIIaCF+uNAIZtkfO0GriBb0agBmGIXqvGLFEexiTKA==
+
+"@trpc/next@^11.0.0-rc.366":
+  version "11.0.0-rc.366"
+  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-11.0.0-rc.366.tgz#d6750faf72fc77db61eda97ad2419e5b3f9499f7"
+  integrity sha512-RDWC87Y6pTDHZHSEvDYrBYA0x/+jXqc/qRDVAMSMsFUo+X+I74aNcsFNR9YBnMd5aENvD+To2KwnctYUsZ9R4w==
+
+"@trpc/react-query@^11.0.0-rc.366":
+  version "11.0.0-rc.366"
+  resolved "https://registry.yarnpkg.com/@trpc/react-query/-/react-query-11.0.0-rc.366.tgz#5ddec0682cc3dd0b2ffb560bd4f5b8bf1f7c9caf"
+  integrity sha512-LCdJFymEdaKBBNRQPVAcEw9qNu3m+n9hH3qIPKDanLWYlo4h+8lQnj8JIhYpClD2G3gkvD0ZSZ+F54QvwrI3nA==
+
+"@trpc/server@^11.0.0-rc.366":
+  version "11.0.0-rc.366"
+  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-11.0.0-rc.366.tgz#ffea6f1616bad4e9d77160c7aa4fe7a381317117"
+  integrity sha512-Pr7SdpIVrOGtIGt9vs7i3v0hqzlpXbi8/8RV7XfrXVJ5hlzKYOz5VE0AjckhHXuhrUlpTGTDm0/2nz0ywLcQ2g==
 
 "@trysound/sax@0.2.0":
   version "0.2.0"
