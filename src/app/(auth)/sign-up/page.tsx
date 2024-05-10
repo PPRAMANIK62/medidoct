@@ -9,12 +9,13 @@ import Link from "next/link";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { AuthCredentialsValidator } from "@/lib/validators/accountCredentialsValidator";
+import {
+  AuthCredentialsValidator,
+  TAuthCredentialsValidator,
+} from "@/lib/validators/accountCredentialsValidator";
+import { trpc } from "@/app/_trpc/client";
 
 const Page = () => {
-  type TAuthCredentialsValidator = z.infer<typeof AuthCredentialsValidator>;
-
   const {
     register,
     handleSubmit,
@@ -23,8 +24,11 @@ const Page = () => {
     resolver: zodResolver(AuthCredentialsValidator),
   });
 
+  const { mutate, isPending } = trpc.auth.createPayloadUser.useMutation({});
+
   const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {
     // send the data to the server
+    mutate({ email, password });
   };
 
   return (
@@ -68,6 +72,7 @@ const Page = () => {
                   <Label htmlFor="password">Password</Label>
                   <Input
                     {...register("password")}
+                    type="password"
                     className={cn({
                       "focus-visible:ring-red-500": errors.password,
                     })}
