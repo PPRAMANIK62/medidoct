@@ -15,10 +15,13 @@ import {
 } from "@/lib/validators/accountCredentialsValidator";
 import { trpc } from "@/app/_trpc/client";
 import { toast } from "sonner";
-import { ZodError } from "zod";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const Page = () => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const origin = searchParams.get("origin");
+
   const {
     register,
     handleSubmit,
@@ -27,31 +30,28 @@ const Page = () => {
     resolver: zodResolver(AuthCredentialsValidator),
   });
 
-  const router = useRouter();
+  const { mutate: signIn, isPending } = trpc.auth.signInUser.useMutation({
+    onSuccess: () => {
+      toast.success("Signed in successfully");
 
-  const { mutate, isPending } = trpc.auth.createPayloadUser.useMutation({
-    onError: (err) => {
-      if (err.data?.code === "CONFLICT") {
-        toast.error("This email is already in use. Sign in instead.");
+      if (origin) {
+        router.push(`/${origin}`);
         return;
       }
 
-      if (err instanceof ZodError) {
-        toast.error(err.issues[0].message);
-        return;
-      }
-
-      toast.error("Something went wrong. Please try again later.");
+      router.push("/");
+      router.refresh();
     },
-    onSuccess: ({ sentToEmail }) => {
-      toast.success(`We've sent a verification link to ${sentToEmail}`);
-      router.push(`/verify-email?to=${sentToEmail}`);
+    onError: (error) => {
+      if (error.data?.code === "UNAUTHORIZED") {
+        toast.error("Invalid email or password");
+      }
     },
   });
 
   const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {
     // send the data to the server
-    mutate({ email, password });
+    signIn({ email, password });
   };
 
   return (
@@ -63,16 +63,16 @@ const Page = () => {
            text-center"
           >
             <Icons.logo className="w-48" />
-            <h1 className="text-2xl font-bold">Create an account</h1>
+            <h1 className="text-2xl font-bold">Sign in to your account</h1>
 
             <Link
-              href="/sign-in"
+              href="/sign-up"
               className={buttonVariants({
                 variant: "link",
                 className: "gap-1.5",
               })}
             >
-              Already have an account? Sign-in
+              Don&apos;t have an account?
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -113,9 +113,23 @@ const Page = () => {
                   )}
                 </div>
 
-                <Button>Sign up</Button>
+                <Button>Sign in</Button>
               </div>
             </form>
+
+            {/* <div className="relative">
+              <div
+                className="absolute inset-0 flex items-center"
+                aria-hidden="true"
+              >
+                <span className="w-full border-t" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-background px-2 text-muted-foreground">
+                  or
+                </span>
+              </div>
+            </div> */}
           </div>
         </div>
       </div>
