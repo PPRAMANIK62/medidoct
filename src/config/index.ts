@@ -4,58 +4,58 @@ export const PRODUCT_CATEGORIES = [
     value: "health_care" as const,
     featured: [
       {
-        name: "Elderly Care",
+        label: "Elderly Care",
         href: "#",
         value: "elderly_care" as const,
-        imageUrl: "/categories/elderly-care.webp"
+        imageUrl: "/categories/elderly-care.webp",
       },
       {
-        name: "Personal Care",
+        label: "Personal Care",
         href: "#",
         value: "personal_care" as const,
-        imageUrl: "/categories/personal-care.webp"
+        imageUrl: "/categories/personal-care.webp",
       },
       {
-        name: "Skin Care",
+        label: "Skin Care",
         href: "#",
         value: "skin_care" as const,
-        imageUrl: "/categories/skin-care.webp"
+        imageUrl: "/categories/skin-care.webp",
       },
       {
-        name: "Mother and Baby Care",
+        label: "Mother and Baby Care",
         href: "#",
         value: "mother_and_baby_care" as const,
-        imageUrl: "/categories/mother-and-baby-care.webp"
+        imageUrl: "/categories/mother-and-baby-care.webp",
       },
       {
-        name: "Accesories and Wearables",
+        label: "Accesories and Wearables",
         href: "#",
         value: "accesories_and_wearables" as const,
-        imageUrl: "/categories/accesories-and-wearables.webp"
+        imageUrl: "/categories/accesories-and-wearables.webp",
       },
       {
-        name: "Fitness Supplements",
+        label: "Fitness Supplements",
         href: "#",
         value: "fitness_supplements" as const,
-        imageUrl: "/categories/fitness-supplements.webp"
+        imageUrl: "/categories/fitness-supplements.webp",
       },
       {
-        name: "Sexual Wellness",
+        label: "Sexual Wellness",
         href: "#",
         value: "sexual_wellness" as const,
-        imageUrl: "/categories/sexual-wellness.webp"
+        imageUrl: "/categories/sexual-wellness.webp",
       },
       {
-        name: "Diabetic Care",
+        label: "Diabetic Care",
         href: "#",
         value: "diabetic_care" as const,
-        imageUrl: "/categories/diabetic-care.webp"
+        imageUrl: "/categories/diabetic-care.webp",
       },
       {
-        name: "Home Care",
+        label: "Home Care",
         href: "#",
         value: "home_care" as const,
-        imageUrl: "/categories/home-care.webp"
+        imageUrl: "/categories/home-care.webp",
       },
     ],
   },
@@ -65,3 +65,7 @@ export const PRODUCT_CATEGORIES = [
     featured: [],
   },
 ];
+
+export const FEATURED_CATEGORIES = PRODUCT_CATEGORIES.map(
+  (category) => category.featured
+).filter((featured) => featured !== undefined)[0];
