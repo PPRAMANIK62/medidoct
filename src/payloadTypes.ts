@@ -43,7 +43,6 @@ export interface User {
  */
 export interface Product {
   id: number;
-  user?: (number | null) | User;
   name: string;
   description?: string | null;
   price: number;
@@ -60,7 +59,7 @@ export interface Product {
   priceId?: string | null;
   stripeId?: string | null;
   images: {
-    image: number | Media;
+    image: string | Media;
     id?: string | null;
   }[];
   updatedAt: string;
