@@ -51,7 +51,7 @@ const NavItem = ({ isOpen, isAnyOpen, category, handleOpen }: NavItemProps) => {
                 <div className="col-span-4 col-start-1 grid grid-cols-3 gap-x-4 gap-y-4">
                   {category.featured.map((item) => (
                     <div
-                      key={item.name}
+                      key={item.label}
                       className="group relative text-base sm:text-sm"
                     >
                       <div className="relative rounded-lg bg-green-100 hover:shadow hover:shadow-green-500 flex justify-start py-4 px-3">
@@ -67,7 +67,7 @@ const NavItem = ({ isOpen, isAnyOpen, category, handleOpen }: NavItemProps) => {
                             href={item.href}
                             className="block font-medium text-gray-900"
                           >
-                            {item.name}
+                            {item.label}
                           </Link>
                           <p className="mt-1" aria-hidden="true">
                             Shop Now
