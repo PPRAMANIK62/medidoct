@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Sheet,
   SheetContent,
@@ -15,11 +15,18 @@ import Link from "next/link";
 import { buttonVariants } from "./ui/button";
 import Image from "next/image";
 import { useCart } from "@/hooks/useCart";
+import { ScrollArea } from "./ui/scroll-area";
+import CartItem from "./CartItem";
 
 const Cart = () => {
+  const [isMounted, setIsMounted] = useState(false);
   const { items } = useCart();
   const itemCount = items.length;
   const fee = 1;
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const cartTotal = items.reduce(
     (total, { product }) => total + product.price,
@@ -34,12 +41,12 @@ const Cart = () => {
           aria-hidden="true"
         />
         <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-          0
+          {isMounted ? itemCount : 0}
         </span>
       </SheetTrigger>
       <SheetContent className="flex w-full flex-col pr-0 sm:max-w-lg">
         <SheetHeader className="space-y2.5 pr-6">
-          <SheetTitle>Cart (0)</SheetTitle>
+          <SheetTitle>Cart ({itemCount})</SheetTitle>
         </SheetHeader>
 
         {itemCount > 0 ? (
@@ -47,6 +54,11 @@ const Cart = () => {
             <div className="flex w-full flex-col pr-6">
               Cart items
               {/* TODO: cart logic */}
+              <ScrollArea>
+                {items.map(({ product }) => (
+                  <CartItem key={product.id} product={product} />
+                ))}
+              </ScrollArea>
             </div>
             <div className="space-y-4 pr-6">
               <Separator />
