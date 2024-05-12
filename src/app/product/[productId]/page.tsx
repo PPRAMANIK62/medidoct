@@ -1,13 +1,14 @@
+"use client";
+import { trpc } from "@/app/_trpc/client";
 import AddToCartButton from "@/components/AddToCartButton";
 import ImageSlider from "@/components/ImageSlider";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import ProductReel from "@/components/ProductReel";
 import { FEATURED_CATEGORIES } from "@/config";
-import { getPayloadClient } from "@/getPayload";
 import { formatPrice } from "@/lib/utils";
-import { Check, Shield } from "lucide-react";
+import { Product } from "@/payloadTypes";
+import { Check, Loader2, Shield } from "lucide-react";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 
 interface PageProps {
   params: {
@@ -20,23 +21,26 @@ const BREADCRUMBS = [
   { id: 2, name: "Products", href: "/products" },
 ];
 
-const page = async ({ params }: PageProps) => {
+const page = ({ params }: PageProps) => {
   const { productId } = params;
-  const payload = await getPayloadClient();
 
-  const { docs: products } = await payload.find({
-    collection: "products",
-    limit: 1,
-    where: {
-      id: {
-        equals: productId,
-      },
-    },
+  const { data, isLoading } = trpc.getSingleProduct.useQuery({
+    productId,
   });
 
-  const [product] = products;
+  const product = data?.item[0] as Product;
 
-  if (!product) return notFound();
+  if (isLoading) {
+    return (
+      <div className="mt-32 flex flex-col items-center gap-2">
+        <Loader2 className="animate-spin h-8 w-8 text-zinc-300" />
+        <h3 className="font-semibold text-xl">Loading...</h3>
+        <p className="text-muted-foreground text-base">
+          This won&apos;t take long.
+        </p>
+      </div>
+    );
+  }
 
   const label = FEATURED_CATEGORIES.find(
     ({ value }) => value === product.category

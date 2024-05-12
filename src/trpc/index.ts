@@ -6,6 +6,7 @@ import { getPayloadClient } from "../getPayload";
 
 export const appRouter = router({
   auth: authRouter,
+
   getInfiniteProduct: publicProcedure
     .input(
       z.object({
@@ -48,6 +49,25 @@ export const appRouter = router({
         items,
         nextPage: hasNextPage ? nextPage : null,
       };
+    }),
+
+  getSingleProduct: publicProcedure
+    .input(z.object({ productId: z.string() }))
+    .query(async ({ input }) => {
+      const { productId } = input;
+      const payload = await getPayloadClient();
+
+      const { docs: item } = await payload.find({
+        collection: "products",
+        where: {
+          id: {
+            equals: productId,
+          },
+        },
+        depth: 1,
+      });
+
+      return { item };
     }),
 });
 

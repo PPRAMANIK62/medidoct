@@ -56,6 +56,7 @@ export interface Product {
     | 'sexual_wellness'
     | 'diabetic_care'
     | 'home_care';
+  isAvailableForSale: 'yes' | 'no';
   priceId?: string | null;
   stripeId?: string | null;
   images: {
