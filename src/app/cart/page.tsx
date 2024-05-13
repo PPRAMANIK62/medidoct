@@ -9,6 +9,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { trpc } from "../_trpc/client";
 import { useRouter } from "next/navigation";
+import { TRANSACTION_FEE } from "@/config/config";
 
 const Page = () => {
   const [isMOunted, setIsMounted] = useState(false);
@@ -32,7 +33,7 @@ const Page = () => {
     (total, { product }) => total + product.price,
     0
   );
-  const fee = cartTotal !== 0 ? 1 : 0;
+  const fee = cartTotal !== 0 ? TRANSACTION_FEE : 0;
 
   return (
     <div className="bg-white">

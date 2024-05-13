@@ -17,12 +17,13 @@ import Image from "next/image";
 import { useCart } from "@/hooks/useCart";
 import { ScrollArea } from "./ui/scroll-area";
 import CartItem from "./CartItem";
+import { TRANSACTION_FEE } from "@/config/config";
 
 const Cart = () => {
   const [isMounted, setIsMounted] = useState(false);
   const { items } = useCart();
   const itemCount = items.length;
-  const fee = 1;
+  const fee = TRANSACTION_FEE;
 
   useEffect(() => {
     setIsMounted(true);
