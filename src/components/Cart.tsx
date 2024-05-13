@@ -65,7 +65,7 @@ const Cart = () => {
               <div className="space-y-1.5 text-sm">
                 <div className="flex">
                   <span className="flex-1">Shipping</span>
-                  <span>amount</span>
+                  <span>{formatPrice(cartTotal)}</span>
                 </div>
                 <div className="flex">
                   <span className="flex-1">Transaction Fee</span>

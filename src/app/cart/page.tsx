@@ -7,14 +7,26 @@ import { Loader2, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { trpc } from "../_trpc/client";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
-  const { items, removeItem } = useCart();
   const [isMOunted, setIsMounted] = useState(false);
+  const { items, removeItem } = useCart();
+  const router = useRouter();
+
+  const { mutate: createCheckoutSession, isPending } =
+    trpc.payment.createSession.useMutation({
+      onSuccess: ({ url }) => {
+        if (url) router.push(url);
+      },
+    });
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  const productIds = items.map(({ product }) => String(product.id));
 
   const cartTotal = items.reduce(
     (total, { product }) => total + product.price,
@@ -175,7 +187,15 @@ const Page = () => {
             </div>
 
             <div className="mt-6">
-              <Button className="w-full" size="lg">
+              <Button
+                disabled={items.length === 0 || isPending}
+                className="w-full"
+                size="lg"
+                onClick={() => createCheckoutSession({ productIds })}
+              >
+                {isPending ? (
+                  <Loader2 className="w-4 h-4 animate-spin mr-1.5" />
+                ) : null}
                 Checkout
               </Button>
             </div>
