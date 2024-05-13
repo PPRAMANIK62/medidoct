@@ -71,6 +71,25 @@ export const appRouter = router({
 
       return { item };
     }),
+
+  getOrder: publicProcedure
+    .input(z.object({ orderId: z.string() }))
+    .query(async ({ input }) => {
+      const { orderId } = input;
+      const payload = await getPayloadClient();
+
+      const { docs: order } = await payload.find({
+        collection: "orders",
+        where: {
+          id: {
+            equals: orderId,
+          },
+        },
+        depth: 2,
+      });
+
+      return { order };
+    }),
 });
 
 export type AppRouter = typeof appRouter;

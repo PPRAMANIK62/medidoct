@@ -1,5 +1,5 @@
 "use client";
-import { trpc } from "@/app/_trpc/client";
+import { trpc } from "@/trpc/client";
 import AddToCartButton from "@/components/AddToCartButton";
 import ImageSlider from "@/components/ImageSlider";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";

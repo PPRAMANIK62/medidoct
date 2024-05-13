@@ -1,5 +1,5 @@
 "use client";
-import { trpc } from "@/app/_trpc/client";
+import { trpc } from "@/trpc/client";
 import { CircleCheckBig, Loader2, XCircle } from "lucide-react";
 import Link from "next/link";
 import React from "react";
