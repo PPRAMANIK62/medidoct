@@ -1,9 +1,9 @@
 "use client";
-import { trpc } from "@/trpc/client";
 import { CircleCheckBig, Loader2, XCircle } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { buttonVariants } from "./ui/button";
+import { trpc } from "@/app/_trpc/client";
 
 interface VerifyEmailProps {
   token: string;

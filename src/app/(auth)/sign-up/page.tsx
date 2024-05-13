@@ -13,10 +13,10 @@ import {
   AuthCredentialsValidator,
   TAuthCredentialsValidator,
 } from "@/lib/validators/accountCredentialsValidator";
-import { trpc } from "@/trpc/client";
 import { toast } from "sonner";
 import { ZodError } from "zod";
 import { useRouter } from "next/navigation";
+import { trpc } from "@/app/_trpc/client";
 
 const Page = () => {
   const {
