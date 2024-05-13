@@ -68,10 +68,13 @@ const NavItem = ({ isOpen, isAnyOpen, category, handleOpen }: NavItemProps) => {
                             className="block font-medium text-gray-900"
                           >
                             {item.label}
+                            <p
+                              className="mt-1 text-sm font-normal"
+                              aria-hidden="true"
+                            >
+                              Shop Now
+                            </p>
                           </Link>
-                          <p className="mt-1" aria-hidden="true">
-                            Shop Now
-                          </p>
                         </div>
                       </div>
                     </div>
