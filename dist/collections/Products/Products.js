@@ -63,7 +63,24 @@ exports.Products = {
     admin: {
         useAsTitle: "name",
     },
-    access: {},
+    access: {
+        read: function (_a) {
+            var req = _a.req;
+            return req.user.role === "admin";
+        },
+        create: function (_a) {
+            var req = _a.req;
+            return req.user.role === "admin";
+        },
+        update: function (_a) {
+            var req = _a.req;
+            return req.user.role === "admin";
+        },
+        delete: function (_a) {
+            var req = _a.req;
+            return req.user.role === "admin";
+        },
+    },
     hooks: {
         beforeChange: [
             addUser,
