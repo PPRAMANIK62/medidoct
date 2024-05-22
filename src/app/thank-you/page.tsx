@@ -2,7 +2,6 @@ import { getServerSideUser } from "@/lib/payloadUtils";
 import Image from "next/image";
 import React from "react";
 import { cookies } from "next/headers";
-import { getPayloadClient } from "@/getPayload";
 import OrderFinal from "@/components/OrderFinal";
 
 interface PageProps {
